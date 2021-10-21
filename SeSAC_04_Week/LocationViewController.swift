@@ -17,12 +17,22 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var userCurrentLocationLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
+
     //1.CLLocationManager()
     let locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userCurrentLocationLabel.backgroundColor = .red
+        
+        
+        // 애니메이션 적용코드
+//        UIView.animate(withDuration: 5) {
+//            self.userCurrentLocationLabel.alpha = 1
+//
+//        }
 
         //37.556224338786436, 126.9723641115476
         let location = CLLocationCoordinate2D(latitude: 37.556224338786436, longitude: 126.9723641115476)
@@ -47,7 +57,36 @@ class LocationViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+//        showAlert()
+    }
+    
+    
+    @IBAction func updateLabelTextAlert(_ sender: UIButton) {
+        showAlert(title: "레이블 글자변경", message: "변경할게요", okTitle: "바꾸기") {
+            self.userCurrentLocationLabel.text = "dasdf"
+        }
+        
 
+        
+    }
+    
+    @IBAction func alertButtonClicked(_ sender: UIButton) {
+        showAlert(title: "설정으로 이동", message: "권한 허용해주세요", okTitle: "설정으로 이동") {
+            guard let url = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url) { success in
+                    print("잘 열렸다 \(success)")
+                }
+            }
+        }
+        
+    }
 }
 
 
@@ -170,3 +209,5 @@ extension LocationViewController : MKMapViewDelegate {
     }
     
 }
+
+

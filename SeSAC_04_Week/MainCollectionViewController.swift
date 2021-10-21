@@ -55,7 +55,7 @@ class MainCollectionViewController: UIViewController {
         mainCollectionView.backgroundColor = .lightGray
         
         let tagLayout = UICollectionViewFlowLayout()
-        let tagSpacing: CGFloat = 8
+//        let tagSpacing: CGFloat = 8
         tagLayout.scrollDirection = .horizontal
         tagLayout.itemSize = CGSize(width:100,height:40)
         tagLayout.sectionInset = UIEdgeInsets(top: 0 ,left: 20,bottom: 0,right: 20)
@@ -112,7 +112,6 @@ extension MainCollectionViewController : UICollectionViewDataSource ,UICollectio
             
         } else {
             
-        
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier : MainCollectionViewCell.identifier,  for: indexPath ) as? MainCollectionViewCell else {
                 return UICollectionViewCell()
             }
